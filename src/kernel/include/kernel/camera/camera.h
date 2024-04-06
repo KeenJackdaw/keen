@@ -39,7 +39,7 @@ KNN_NAMESPACE_BEGIN
 
     public:
         // constructor
-        Camera(knm::Vec3 loc, knm::Vec3 vec, float fov, float far, float near);
+        Camera(knm::Vec3 position, knm::Vec3 direction, float fov, float far, float near);
         Camera(float fov, float far, float near);
 
         // destructor
@@ -50,7 +50,7 @@ KNN_NAMESPACE_BEGIN
         virtual void transform(double dx, double dy, double dz);
 
         // look at
-        virtual void lookAt(knm::Vec3 loc);
+        virtual void lookAt(knm::Vec3 position);
     };
 
 }

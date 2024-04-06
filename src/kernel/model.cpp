@@ -6,27 +6,27 @@
 
 KNN_NAMESPACE_BEGIN
 
-knn::Model::Model(knm::Vec3 w_loc, knm::Vec3 w_vec, knm::Vec3 l_loc, knm::Vec3 l_vec) :
-w_loc(w_loc), w_vec(w_vec), l_loc(l_loc), l_vec(l_vec) {}
+knn::Model::Model(knm::Vec3 worldPosition, knm::Vec3 worldDirection, knm::Vec3 localPosition, knm::Vec3 localDirection) :
+        worldPosition(worldPosition), worldDirection(worldDirection), localPosition(localPosition), localDirection(localDirection) {}
 
-knn::Model::Model(knm::Vec3 w_loc, knm::Vec3 w_vec) :
-Model(w_loc, w_vec, knm::Vec3::zero(), knm::Vec3::zero()){}
+knn::Model::Model(knm::Vec3 worldPosition, knm::Vec3 worldDirection) :
+Model(worldPosition, worldDirection, knm::Vec3::zero(), knm::Vec3::zero()){}
 
 knn::Model::Model() :
 Model(knm::Vec3::zero(), knm::Vec3::zero()){}
 
-const knm::Vec3 &Model::getLoc(CoordType type) const {
+const knm::Vec3 &Model::getPosition(CoordType type) const {
     if (type == CoordType::LOCAL) {
-        return this->l_loc;
+        return this->localPosition;
     }
-    return this->w_loc;
+    return this->worldPosition;
 }
 
-const knm::Vec3 &Model::getVec(CoordType type) const {
+const knm::Vec3 &Model::getDirection(CoordType type) const {
     if (type == CoordType::LOCAL) {
-        return this->l_vec;
+        return this->localDirection;
     }
-    return this->w_vec;
+    return this->worldDirection;
 }
 
 KNN_NAMESPACE_END

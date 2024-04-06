@@ -12,21 +12,21 @@ KNN_NAMESPACE_BEGIN
 
 class Model {
 private:
-    knm::Vec3 l_loc;
-    knm::Vec3 l_vec;
+    knm::Vec3 localPosition;
+    knm::Vec3 localDirection;
 
-    knm::Vec3 w_loc;
-    knm::Vec3 w_vec;
+    knm::Vec3 worldPosition;
+    knm::Vec3 worldDirection;
 
 public:
-    Model(knm::Vec3 w_loc, knm::Vec3 w_vec, knm::Vec3 l_loc, knm::Vec3 l_vec);
-    Model(knm::Vec3 w_loc, knm::Vec3 w_vec);
+    Model(knm::Vec3 worldPosition, knm::Vec3 worldDirection, knm::Vec3 localPosition, knm::Vec3 localDirection);
+    Model(knm::Vec3 worldPosition, knm::Vec3 worldDirection);
     Model();
 
     ~Model() = default;
 
-    [[nodiscard]] const knm::Vec3 &getLoc(CoordType type) const;
-    [[nodiscard]] const knm::Vec3 &getVec(CoordType type) const;
+    [[nodiscard]] const knm::Vec3 &getPosition(CoordType type) const;
+    [[nodiscard]] const knm::Vec3 &getDirection(CoordType type) const;
 };
 
 KNN_NAMESPACE_END

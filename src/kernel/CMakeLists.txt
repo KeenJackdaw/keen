@@ -1,4 +1,4 @@
-add_library(keen_kernel STATIC camera/camera.cpp model.cpp)
+add_library(keen_kernel STATIC camera/camera.cpp model.cpp driver/vulkan/validation.cpp)
 
 target_compile_definitions(keen_kernel
         PUBLIC
