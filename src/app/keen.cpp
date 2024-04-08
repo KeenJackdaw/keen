@@ -3,7 +3,9 @@
 //
 
 #include <iostream>
-#include "kernel/camera/camera.h"
+#include "kernel/driver/vulkan/application.h"
 int main() {
+
+    VkInstance instance = knn::createVKInstance("keen", "keen", 1, VK_API_VERSION_1_1);
     std::cout << "Hello world" << std::endl;
 }

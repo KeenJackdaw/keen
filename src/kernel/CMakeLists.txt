@@ -1,4 +1,12 @@
-add_library(keen_kernel STATIC camera/camera.cpp model.cpp driver/vulkan/validation.cpp)
+add_library(keen_kernel STATIC)
+
+target_sources(keen_kernel
+    PRIVATE
+        camera/camera.cpp
+        driver/vulkan/application.cpp
+        driver/vulkan/validation.cpp
+        driver/vulkan/extension.cpp
+)
 
 target_compile_definitions(keen_kernel
         PUBLIC
@@ -10,4 +18,4 @@ add_dependencies(keen_kernel keen_math)
 target_include_directories(keen_kernel
         PUBLIC include
 )
-target_link_libraries(keen_kernel PRIVATE keen_math)
+target_link_libraries(keen_kernel PRIVATE keen_math glfw)

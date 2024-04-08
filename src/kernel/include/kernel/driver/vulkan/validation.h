@@ -2,9 +2,10 @@
 // Created by keen on 4/6/24.
 //
 
-#ifndef KEEN_VALIDATION_H
-#define KEEN_VALIDATION_H
+#ifndef KEEN_VULKAN_VALIDATION_H
+#define KEEN_VULKAN_VALIDATION_H
 
+#include <iostream>
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <cstring>
@@ -15,6 +16,15 @@ KNN_NAMESPACE_BEGIN
 
 bool supportValidation();
 
+VkBool32 debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+                       VkDebugUtilsMessageTypeFlagsEXT messageType,
+                       const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
+                       void *pUserData);
+
+VkDebugUtilsMessengerCreateInfoEXT populateDebugMessengerCreateInfo();
+
+std::vector<const char *> getValidationLayers();
+
 KNN_NAMESPACE_END
 
-#endif //KEEN_VALIDATION_H
+#endif //KEEN_VULKAN_VALIDATION_H

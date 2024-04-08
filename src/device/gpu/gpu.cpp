@@ -8,8 +8,10 @@
 KND_NAMESPACE_BEGIN
 
 GPUDevice::GPUDevice(knd::DeviceInfo *deviceInfo) {
-    if (!knn::supportValidation()) {
-        // TODO
+    this->supportValidationLayer = knn::supportValidation();
+
+    if (this->supportValidationLayer) {
+
     }
 }
 

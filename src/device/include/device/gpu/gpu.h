@@ -13,6 +13,8 @@ KND_NAMESPACE_BEGIN
 
 class GPUDevice : Device {
 private:
+    bool supportValidationLayer;
+
     VkPhysicalDevice physicalDevice = nullptr;
     VkDevice vkDevice = nullptr;
     VkInstance instance = nullptr;
