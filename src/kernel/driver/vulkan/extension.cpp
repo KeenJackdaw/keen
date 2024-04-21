@@ -21,6 +21,19 @@ std::vector<const char *> getValidationExtensions() {
     return {VK_EXT_DEBUG_UTILS_EXTENSION_NAME};
 }
 
+std::vector<const char *> getInstanceExtensions() {
+    std::vector<const char *> glfwExtensions = getGLFWExtensions();
+    std::vector<const char *> validationExtensions = getValidationExtensions();
+    std::vector<const char *> extensions(glfwExtensions.size() + validationExtensions.size());
+    std::merge(glfwExtensions.begin(), glfwExtensions.end(), validationExtensions.begin(), validationExtensions.end(), extensions.begin());
+
+    return extensions;
+}
+
+std::vector<const char *> getDeviceExtensions() {
+    return {VK_KHR_SWAPCHAIN_EXTENSION_NAME};
+}
+
 KNN_NAMESPACE_END
 
 

@@ -27,7 +27,12 @@ bool supportValidation() {
 }
 
 std::vector<const char *> getValidationLayers() {
-    return {KNN_VK_VALIDATION_LAYER};
+    std::vector<const char *> layers = {};
+    if (supportValidation()) {
+        layers.push_back(KNN_VK_VALIDATION_LAYER);
+    }
+
+    return layers;
 }
 
 VkBool32

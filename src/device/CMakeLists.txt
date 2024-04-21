@@ -1,4 +1,10 @@
-add_library(keen_device STATIC gpu/gpu.cpp)
+add_library(keen_device STATIC)
+
+target_sources(keen_device
+    PRIVATE
+        gpu/gpu.cpp
+        device.cpp
+)
 
 target_compile_definitions(keen_device
         PUBLIC

@@ -13,10 +13,16 @@ KND_NAMESPACE_BEGIN
 
 class GPUDevice : Device {
 private:
-    bool supportValidationLayer;
+    // validation related
+    bool supportValidation = false;
 
+    // device related
+    std::vector<VkPhysicalDevice> physicalDevices{};
     VkPhysicalDevice physicalDevice = nullptr;
+    std::vector<VkQueueFamilyProperties> queueFamilies{};
     VkDevice vkDevice = nullptr;
+
+    // vulkan instance
     VkInstance instance = nullptr;
 
 public:

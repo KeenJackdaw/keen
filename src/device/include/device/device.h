@@ -5,6 +5,8 @@
 #ifndef KEEN_DEVICE_H
 #define KEEN_DEVICE_H
 
+#include <vector>
+
 KND_NAMESPACE_BEGIN
 
 class Device {

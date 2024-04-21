@@ -5,6 +5,9 @@
 #ifndef KEEN_TYPES_H
 #define KEEN_TYPES_H
 
+#define KNN_MAKE_VERSION(major, minor, patch) \
+    ((uint32_t) major << 20U) | ((uint32_t) minor << 10U) | ((uint32_t) patch << 2U)
+
 KNN_NAMESPACE_BEGIN
 
 typedef enum CoordType {

@@ -3,16 +3,17 @@
 //
 
 #include "device/gpu/gpu.h"
-#include "kernel/driver/vulkan/validation.h"
+#include "kernel/driver/vulkan/application.h"
+#include "kernel/driver/vulkan/device.h"
 
 KND_NAMESPACE_BEGIN
 
 GPUDevice::GPUDevice(knd::DeviceInfo *deviceInfo) {
-    this->supportValidationLayer = knn::supportValidation();
-
-    if (this->supportValidationLayer) {
-
-    }
+    this->supportValidation = knn::supportValidation();
+    this->instance = knn::createVKInstance(VK_API_VERSION_1_1);
+    this->physicalDevices = knn::getPhysicalDevices(this->instance);
+    this->physicalDevice = knn::pickSuitableDevice(this->physicalDevices);
+    this->queueFamilies = knn::getPhysicalDeviceQueueFamilies(this->physicalDevice);
 }
 
 KND_NAMESPACE_END

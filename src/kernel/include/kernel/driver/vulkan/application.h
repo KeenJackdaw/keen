@@ -7,12 +7,13 @@
 
 #include <algorithm>
 #include <vulkan/vulkan.h>
-#include "validation.h"
-#include "extension.h"
+#include "kernel/driver/vulkan/validation.h"
+#include "kernel/driver/vulkan/extension.h"
+#include "kernel/types.h"
 
 KNN_NAMESPACE_BEGIN
 
-VkInstance createVKInstance(const char *appName, const char *engineName, uint32_t appVersion, uint32_t apiVersion);
+VkInstance createVKInstance(uint32_t apiVersion);
 
 bool checkVKApiVersion(uint32_t targetVersion);
 

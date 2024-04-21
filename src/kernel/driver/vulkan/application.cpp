@@ -6,17 +6,18 @@
 
 KNN_NAMESPACE_BEGIN
 
-VkInstance createVKInstance(const char *appName, const char *engineName, uint32_t appVersion, uint32_t apiVersion) {
+VkInstance createVKInstance(uint32_t apiVersion) {
     VkApplicationInfo appInfo{};
 
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName = appName;
-    appInfo.applicationVersion = appVersion;
-    appInfo.pEngineName = engineName;
+    appInfo.pApplicationName = KEEN;
+    appInfo.applicationVersion = KNN_MAKE_VERSION(KEEN_VERSION_MAJOR, KEEN_VERSION_MINOR, KEEN_VERSION_PATCH);
+    appInfo.pEngineName = KEEN_ENGINE;
 
     if (!checkVKApiVersion(apiVersion)) {
-        return nullptr;
+        throw std::runtime_error("apiVersion requirement check failed");
     }
+
     appInfo.apiVersion = apiVersion;
 
     appInfo.pNext = nullptr;
@@ -26,25 +27,15 @@ VkInstance createVKInstance(const char *appName, const char *engineName, uint32_
     createInfo.pApplicationInfo = &appInfo;
 
     VkDebugUtilsMessengerCreateInfoEXT createInfoExt = populateDebugMessengerCreateInfo();
-    std::vector<const char *> validationLayers = getValidationLayers();
 
-    if (supportValidation()) {
-        createInfo.enabledLayerCount = validationLayers.size();
-        createInfo.ppEnabledLayerNames = validationLayers.data();
-        createInfo.pNext = &createInfoExt;
-    } else {
-        createInfo.enabledLayerCount = 0;
-        createInfo.ppEnabledLayerNames = nullptr;
-    }
+    std::vector<const char *> layers = getValidationLayers();
+    createInfo.enabledLayerCount = layers.size();
+    createInfo.ppEnabledLayerNames = layers.empty() ? nullptr : layers.data();
+    createInfo.pNext = &createInfoExt;
 
-    std::vector<const char *> glfwExtensions = getGLFWExtensions();
-    std::vector<const char *> validationExtensions = getValidationExtensions();
-    std::vector<const char *> extensions(glfwExtensions.size() + validationExtensions.size());
-    std::merge(glfwExtensions.begin(), glfwExtensions.end(), validationExtensions.begin(), validationExtensions.end(), extensions.begin());
-
+    std::vector<const char *> extensions = getInstanceExtensions();
     createInfo.enabledExtensionCount = extensions.size();
     createInfo.ppEnabledExtensionNames = extensions.data();
-
 
     VkInstance instance;
     if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
